@@ -2,7 +2,7 @@ def find_language_information(languages, language_name)
   # Take languages (a nested hash) and language_name as a symbol, return the
   # value for the language_name key (which will be another hash!)
 
-  # the languages hash will look something like this:
+  # the languages hash will look sxomething like this:
   # {
   #   ruby: { initial_release: 'December 25, 1996', is_beautiful?: true },
   #   javascript: { initial_release: 'December 4, 1995', is_beautiful?: false }
