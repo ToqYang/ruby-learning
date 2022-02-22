@@ -1,0 +1,22 @@
+<strong>New User:</strong><br><br>
+
+<% @user.errors.full_messages.each do |message| %>
+  <div><%= message %></div>
+<% end %>
+
+<%= form_with model: @user do |form| %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <%= form.label "Username:" %>
+  <%= form.text_field :username %>
+  <br>
+
+  <%= form.label "Email:" %>
+  <%= form.email_field :email %>
+  <br>
+
+  <%= form.label "Password:" %>
+  <%= form.password_field :password %>
+  <br>
+
+  <%= form.submit "Create" %>
+<% end %>
