@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action only: [:new, :create, :index]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /posts or /posts.json
   def index
@@ -26,7 +27,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
+        format.html { redirect_to root_path, notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
