@@ -5,7 +5,11 @@
           <img src="https://icons.iconarchive.com/icons/diversity-avatars/avatars/256/charlie-chaplin-icon.png" class="relative rounded-lg -top-8 -mb-4 bg-white border h-20 w-20" alt="" loading="lazy">
           <div class="flex flex-col w-full">
               <div class="flex flex-row justify-between">
-                  <p class="relative text-xl whitespace-nowrap truncate overflow-hidden"><%= user_signed_in? ? 'Logeado' : 'Anonymous' %></p>
+                <% if user_signed_in? %>              
+                  <p class="relative text-xl whitespace-nowrap truncate overflow-hidden"><%= current_user.username %></p>
+                <% else %>
+                  <p class="relative text-xl whitespace-nowrap truncate overflow-hidden">Anonymous</p>
+                <% end %>
               </div>
               <p class="text-gray-400 text-sm">20 April 2022, at 14:88 PM</p>
           </div>
