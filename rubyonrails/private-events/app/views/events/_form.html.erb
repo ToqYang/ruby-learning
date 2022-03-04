@@ -1,0 +1,33 @@
+<%= form_with(model: event, class: "contents") do |form| %>
+  <% if event.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+        <% event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="inline">
+    <div class="form__e-title">
+      <%= form.label :title, "Title: " %>
+      <%= form.text_field :title %>
+    </div>
+    <div class="form__e-description">
+      <%= form.label :description, "Description: " %>
+      <%= form.text_field :description %>
+    </div>
+    <div class="form__e-date-ocurrence">
+      <%= form.label :date_ocurrence, "Date Ocurrence: " %>
+      <%= form.datetime_local_field :date_ocurrence %>
+    </div>
+    <div class="form__e-location">
+      <%= form.label :location, "Location: " %>
+      <%= form.text_field :location %>
+    </div>
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

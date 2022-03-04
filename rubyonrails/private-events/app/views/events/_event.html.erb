@@ -1,0 +1,38 @@
+<div id="<%= dom_id event %>">
+  <h1>Title: <%= event.title %></h1>
+  <p>Description: <%= event.description %></p>
+  <p>Date: <%= event.date_ocurrence %></p>
+  <p>Location: <%= event.location %></p>
+  <p>Creator: <%= event.creator.email %></p>
+
+  <% if event.atteende_user.length != 0 %>
+    <strong>Attendance:</strong>
+    <ul>
+      <% event.atteende_user.each do | user | %>
+        <li style="display:flex; flex-direction:row;">
+          <%= user.email %>
+          <% if !current_user.nil? && current_user.id == event.creator.id %>
+            <%= button_to "Unsubscribe", atteende_path(:atteende => { attendee_id: user.id, attended_event_id: event.id }), method: :delete %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+    
+  <% if user_signed_in? %>
+    <% attende_user = Attendee.where(user_id: current_user.id, event_id: event.id)  %>
+    <% if event.atteende_user.exists?(:email => current_user.email) %>
+      <%= button_to "Unjoin", atteende_path(:atteende => { attendee_id: current_user.id, attended_event_id: event.id }), method: :delete %>
+    <% else %>
+      <% if current_user.id != event.creator.id %>
+        <%= button_to "Join", atteendes_path(:atteende => { attendee_id: current_user.id, attended_event_id: event.id }) %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% if action_name != "show" && current_user.email == event.creator.email %>
+    <%= link_to "Show this event", event, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this event', edit_event_path(event), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

@@ -1,0 +1,2 @@
+module AtteendesHelper
+end
