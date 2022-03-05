@@ -126,3 +126,5 @@ Temporary Items
 
 tmp/
 .idea/
+/yarn.lock
+package-json.lock
