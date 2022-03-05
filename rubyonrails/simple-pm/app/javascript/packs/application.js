@@ -7,9 +7,19 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+import Sortable from "sortablejs"
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
 import '../stylesheets/application'
+
+
+document.addEventListener('turbolinks:load', () => {
+  const el = document.getElementById("tasks-list");
+  const sortable = Sortable.create(el, {
+    animation: 150,
+    ghostClass: 'light-bg'
+  });
+})
