@@ -23,3 +23,4 @@ document.addEventListener('turbolinks:load', () => {
     ghostClass: 'light-bg'
   });
 })
+import "controllers"
