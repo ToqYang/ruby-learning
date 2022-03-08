@@ -33,7 +33,7 @@ gem 'devise'
 # Nested scaffold
 gem 'nested_scaffold'
 # View Components
-gem "view_component"
+gem "view_component", require: "view_component/engine"
  
 
 group :development, :test do
