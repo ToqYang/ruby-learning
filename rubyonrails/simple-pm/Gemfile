@@ -32,6 +32,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 # Nested scaffold
 gem 'nested_scaffold'
+# View Components
+gem "view_component"
+ 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
