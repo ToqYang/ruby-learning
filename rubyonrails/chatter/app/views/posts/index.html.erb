@@ -1,0 +1,11 @@
+<div class="container">
+  <p id="notice"><%= notice %></p>
+
+  <h1>Posts</h1>
+  <h4>Cable Ready</h4>
+
+  <%= render "form" %>
+  <div id="timeline">
+    <%= render partial: "post", collection: @posts %>
+  </div>
+</div>
