@@ -41,7 +41,11 @@ class AtteendesController < ApplicationController
   def destroy
     # event -> usuario, id of
     respond_to do |format|
-      if current_user.id == atteende_params[:attendee_id].to_i
+      atteende_to_destroy = atteende_params[:attendee_id].to_i
+      curr_event_id = atteende_params[:attended_event_id]
+      creator_event = Event.where(id: curr_event_id).first.user_id
+
+      if current_user.id == creator_event || current_user.id == atteende_to_destroy
         attendance = Attendee.where(atteende_params)
         if attendance.length > 0
           Attendee.destroy(attendance[0].id)
