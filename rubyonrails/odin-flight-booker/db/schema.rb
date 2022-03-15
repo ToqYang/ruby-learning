@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_13_003150) do
+ActiveRecord::Schema.define(version: 2022_03_15_015400) do
 
   create_table "airports", force: :cascade do |t|
     t.integer "code", default: 0, null: false
@@ -19,16 +19,36 @@ ActiveRecord::Schema.define(version: 2022_03_13_003150) do
     t.index ["code"], name: "index_airports_on_code", unique: true
   end
 
+  create_table "bookings", force: :cascade do |t|
+    t.integer "passenger_id", null: false
+    t.integer "flight_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["flight_id"], name: "index_bookings_on_flight_id"
+    t.index ["passenger_id"], name: "index_bookings_on_passenger_id"
+  end
+
   create_table "flights", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "departure_id", null: false
     t.integer "arrival_id", null: false
     t.string "name"
+    t.datetime "duration"
+    t.datetime "departure_time"
     t.index ["arrival_id"], name: "index_flights_on_arrival_id"
     t.index ["departure_id"], name: "index_flights_on_departure_id"
   end
 
+  create_table "passengers", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "bookings", "flights"
+  add_foreign_key "bookings", "passengers"
   add_foreign_key "flights", "airports", column: "arrival_id"
   add_foreign_key "flights", "airports", column: "departure_id"
 end
