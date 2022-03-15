@@ -3,12 +3,32 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Flights</h1>
-    <%= link_to 'New flight', new_flight_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-  </div>
+    <%
+=begin%>
+ <div id="flights" class="min-w-full">
+      <%= render @flights %>
+    </div> 
+<%
+=end%>
 
-  <div id="flights" class="min-w-full">
-    <%= render @flights %>
+  <div>
+  <%= render(DropdownComponent.new(id_name: 'departure')) %>
+    <%
+=begin%>
+ <div>
+      <%= render(DropdownComponent.new(id_name: 'departure')) %>
+      <%= render(DropdownComponent.new(id_name: 'arrival')) %>
+      <%= render(DropdownComponent.new(id_name: 'passengers')) %>
+    </div>
+    <div id="date">
+      <%= render(DropdownComponent.new(id_name: 'day')) %>
+      <%= render(DropdownComponent.new(id_name: 'month')) %>
+      <%= render(DropdownComponent.new(id_name: 'year')) %>
+    </div>
+    <div> 
+<%
+=end%>
+      <button class="bg-indigo-500 text-white text-base rounded-lg px-4 py-2 font-thin">Search</button>
+    </div>
   </div>
 </div>

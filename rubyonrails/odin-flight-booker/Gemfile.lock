@@ -168,13 +168,6 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
-    slim (4.1.0)
-      temple (>= 0.7.6, < 0.9)
-      tilt (>= 2.0.6, < 2.1)
-    slim-rails (3.3.0)
-      actionpack (>= 3.1)
-      railties (>= 3.1)
-      slim (>= 3.0, < 5.0)
     spring (4.0.0)
     sprockets (4.0.3)
       concurrent-ruby (~> 1.0)
@@ -192,7 +185,6 @@ GEM
       redis
     tailwindcss-rails (2.0.8-arm64-darwin)
       railties (>= 6.0.0)
-    temple (0.8.2)
     thor (1.2.1)
     thread-local (1.1.0)
     tilt (2.0.10)
@@ -239,7 +231,6 @@ DEPENDENCIES
   rails (~> 6.1.4)
   sass-rails (>= 6)
   selenium-webdriver
-  slim-rails
   spring
   sqlite3 (~> 1.4)
   stimulus_reflex (~> 3.4)
