@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
 class DropdownComponent < ViewComponent::Base
-  attr_reader :id_name
+  attr_reader :id_name, :title
 
-  def initialize(id_name:)
+  def initialize(id_name:, title:)
     @id_name = id_name
-  end
-
-  def title
-    id_name.to_s.capitalize
+    @title = title
   end
 end

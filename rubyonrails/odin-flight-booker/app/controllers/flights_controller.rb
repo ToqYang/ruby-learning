@@ -3,7 +3,17 @@ class FlightsController < ApplicationController
 
   # GET /flights or /flights.json
   def index
-    @flights = Flight.all
+    if flight_search_params.present?
+      puts "Hay parametros"
+      search = flight_search_params
+      date = search[:date].to_datetime
+      #date
+      @flights = Flight.where(departure_id: Airport.where(code: search[:departure_code]).first.id, arrival_id: Airport.where(code: search[:arrival_code]).first.id, date: date)
+      puts "Hay #{@flights.count} vuelos"
+    else
+      @flights = Flight.all
+      puts "Hay #{@flights.count} vuelos.--"
+    end
   end
 
   # GET /flights/1 or /flights/1.json
@@ -63,8 +73,13 @@ class FlightsController < ApplicationController
       @flight = Flight.find(params[:id])
     end
 
+    # Only params flight
+    def flight_search_params
+      params.permit(:departure_code, :arrival_code, :date, :num_tickets)
+    end
+
     # Only allow a list of trusted parameters through.
     def flight_params
-      params.fetch(:flight, {})
+      params.fetch(:flight, {}).permit(:departure_code, :arrival_code, :date, :num_tickets)
     end
 end

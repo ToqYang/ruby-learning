@@ -6,7 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-puts "STARR SEEDING"
+# tables = ActiveRecord::Base.connection.tables - ['schema_migrations']
+
+# # In PostgreSQL, it does not do this automatically. You can use TRUNCATE TABLE table RESTART IDENTITY;
+# tables.each do |table|
+#   ActiveRecord::Base.connection.execute("TRUNCATE #{table} RESTART IDENTITY CASCADE")
+# end
+
+puts "START SEEDING"
 
 Airport.codes.values.each do |i|
   if Airport.new(code: i).save
@@ -29,8 +36,17 @@ MIN_AIRPORT_CODES = Airport.ids.min
 
     break if departure != arrival
   end
-  
-  if Flight.new(departure_id: departure, arrival_id: arrival).save
+
+  departure_time = rand(-5.years..5.years).ago.to_datetime
+  duration = departure_time + rand(1.hour..5.hours)
+  flight = {
+    departure_id: departure,
+    arrival_id: arrival,
+    name: "#{[*?A..?Z].sample( 2 ).join}#{rand 100..999}",
+    duration: duration,
+    departure_time: departure_time
+  }
+  if Flight.new(flight).save
     puts "Created flight #{i}"
   else
     puts "Failed to create flight #{i}"
