@@ -3,21 +3,24 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <form method="GET" class="flex flex-col items-center">
+  <%= form_with(url: "/flights", method: "get", local: true, id: "search-flights", class: "flex flex-col items-center") do %>
     <div>
-      <%= render(DropdownComponent.new(id_name: 'departure_code', title: 'Departure')) %>
-      <%= render(DropdownComponent.new(id_name: 'arrival_code', title: 'Arrival')) %>
-      <%= render(DropdownComponent.new(id_name: 'num_tickets', title: 'Passenger')) %>
+      <%= render(DropdownComponent.new(id_name: 'departure_code', title: 'Departure', datalist: Airport.codes.keys)) %>
+      <%= render(DropdownComponent.new(id_name: 'arrival_code', title: 'Arrival', datalist: Airport.codes.keys)) %>
+      <%= render(DropdownComponent.new(id_name: 'num_tickets', title: 'Passenger', datalist: [1,2,3,4])) %>
     </div>
     <div id="date" class="flex flex-row flex-wrap items-center w-1/2">
-      <%= render(DropdownComponent.new(id_name: 'day', title: 'Day')) %>
-      <%= render(DropdownComponent.new(id_name: 'month', title: 'Month')) %>
-      <%= render(DropdownComponent.new(id_name: 'year', title: 'Year')) %>
+      <%= render(DropdownComponent.new(id_name: 'day', title: 'Day', datalist: Flight.day_available)) %>
+      <%= render(DropdownComponent.new(id_name: 'month', title: 'Month', datalist: Flight.month_available)) %>
+      <%= render(DropdownComponent.new(id_name: 'year', title: 'Year', datalist: Flight.year_available)) %>
     </div>
-    <button class="bg-indigo-500 text-white text-base rounded-lg px-4 py-2 font-thin">Search</button>
-  </form>
+    <button class="bg-indigo-500 text-white text-base rounded-lg px-4 py-2 font-thin" data-controller="dropdown" data-action="click->dropdown#submit">Search</button> 
+  <% end %>
 
-  <div id="flights" class="min-w-full">
+ <div id="flights" class="min-w-full">
     <%= render @flights %>
-  </div> 
+    <%= render "flights/table_flights", flights_available: @flights.first %>
+
+    <%= @flights.length %>
+  </div>  
 </div>

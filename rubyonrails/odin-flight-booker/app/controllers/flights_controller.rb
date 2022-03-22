@@ -1,18 +1,15 @@
+
+
 class FlightsController < ApplicationController
   before_action :set_flight, only: %i[ show edit update destroy ]
 
   # GET /flights or /flights.json
   def index
-    if flight_search_params.present?
-      puts "Hay parametros"
-      search = flight_search_params
-      date = search[:date].to_datetime
-      #date
-      @flights = Flight.where(departure_id: Airport.where(code: search[:departure_code]).first.id, arrival_id: Airport.where(code: search[:arrival_code]).first.id, date: date)
-      puts "Hay #{@flights.count} vuelos"
+    #byebug
+    if params[:flight].present?
+      @flights = Flight.where(flight_params)
     else
       @flights = Flight.all
-      puts "Hay #{@flights.count} vuelos.--"
     end
   end
 
@@ -73,13 +70,16 @@ class FlightsController < ApplicationController
       @flight = Flight.find(params[:id])
     end
 
-    # Only params flight
-    def flight_search_params
-      params.permit(:departure_code, :arrival_code, :date, :num_tickets)
+    def clean_unnecesary_keys(params_hash)
+      params_hash.except(:day, :month, :year, :departure_code, :arrival_code)
     end
 
     # Only allow a list of trusted parameters through.
     def flight_params
-      params.fetch(:flight, {}).permit(:departure_code, :arrival_code, :date, :num_tickets)
+      prev_params = params.fetch(:flight, {}).permit(:departure_code, :arrival_code, :day, :month, :year)
+      prev_params[:departure_time] = Flight.built_date_from_string(prev_params[:day], prev_params[:month], prev_params[:year])
+      prev_params[:departure_id] = Airport.search_code(prev_params[:departure_code]).id
+      prev_params[:arrival_id] = Airport.search_code(prev_params[:arrival_code]).id
+      clean_unnecesary_keys(prev_params)
     end
 end

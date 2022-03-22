@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ExampleReflex < ApplicationReflex
+class DropdownReflex < ApplicationReflex
   # Add Reflex methods in this file.
   #
   # All Reflex instances include CableReady::Broadcaster and expose the following properties:
@@ -31,5 +31,4 @@ class ExampleReflex < ApplicationReflex
   #   end
   #
   # Learn more at: https://docs.stimulusreflex.com/reflexes#reflex-classes
-  this.stimulate('TasksReflex#sort', element);
 end

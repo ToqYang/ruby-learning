@@ -1,7 +1,17 @@
 <div id="<%= dom_id flight %>">
-  <% if action_name != "show" %>
-    <%= link_to "Show this flight", flight, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this flight', edit_flight_path(flight), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
+  <%
+=begin%>
+ <div class="field">
+    <%= f.label "Get Email" %> <br />
+    <%= f.check_box :send_email %> <br />
+  </div> 
+<%
+=end%>
+<%
+=begin%>
+ name: string, duration: datetime, departure_time: datetime, num_tickets: integer 
+<%
+=end%>
 </div>
+
+

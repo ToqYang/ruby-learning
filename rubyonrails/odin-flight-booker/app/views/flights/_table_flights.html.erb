@@ -1,0 +1,42 @@
+<div class="flex flex-col justify-center h-full">
+    <!-- Table -->
+    <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+        <header class="px-5 py-4 border-b border-gray-100">
+            <h2 class="font-semibold text-gray-800">Flights</h2>
+        </header>
+        <div class="p-3">
+            <form action="/bookings/new" method="GET">
+                <input type="hidden" name="pass" value="1">
+                <div class="overflow-x-auto">
+                    <table class="table-auto w-full">
+                        <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                            <tr>
+                                <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">Check</div>
+                                </th>
+                                <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">Name</div>
+                                </th>
+                                <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">Departure Time</div>
+                                </th>
+                                <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">Duration</div>
+                                </th>
+                                <th class="p-2 whitespace-nowrap">
+                                    <div class="font-semibold text-left">Arrival Time</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm divide-y divide-gray-100" id="checkboxes">
+                            <% Array(flights_available).each do | flight | %>
+                                <%= render(FlightDetailComponent.new(flightAvailable: flight)) %>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <%= button_to "Continue to passengers", class: "bg-indigo-500 text-white text-base rounded-lg px-4 py-2 font-thin" %>
+        </form>
+    </div>
+</div>

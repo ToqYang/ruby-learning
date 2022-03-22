@@ -1,0 +1,24 @@
+<tr>
+    <td class="p-2 whitespace-nowrap flex justify-content-center">
+        <div class="flex items-center">
+            <div class="font-medium text-gray-800">
+                <input id="<%= identificator %>" type="radio" value="<%= identificator %>" name="flight"> 
+            </div>
+        </div>
+    </td>
+    <td class="p-2 whitespace-nowrap">
+        <div class="flex items-center">
+            <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full" src="https://descargas.ams3.digitaloceanspaces.com/images/3839/juegos-de-aviones-2021-avion-simulador-de-vuelo_icon_android.jpg" width="40" height="40" alt="Alex Shatov"></div>
+            <div class="font-medium text-gray-800"><%= name %></div>
+        </div>
+    </td>
+    <td class="p-2 whitespace-nowrap">
+        <div class="text-left"><%= show_time_readable(departure_time) %></div>
+    </td>
+    <td class="p-2 whitespace-nowrap">
+        <div class="text-left font-medium text-green-500"><%= duration %></div>
+    </td>
+    <td class="p-2 whitespace-nowrap">
+        <div class="text-left text-center"><%= show_time_readable(arrival_time) %></div>
+    </td>
+</tr>
